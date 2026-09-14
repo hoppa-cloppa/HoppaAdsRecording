@@ -1,0 +1,25 @@
+{
+  "name": "com.hoppaplay.adsrecording",
+  "version": "1.0.0",
+  "displayName": "Hoppa Ads Recording",
+  "description": "Records gameplay touch interactions on device and writes them as a timestamped JSON log, which the Hoppa ad video editor replays to reconstruct the player's finger over a screen recording. Hides the game UI during capture, marks the start and end of a take with a sync flash so the editor can align the log to the video, and shares the result straight off the device. Requires Unity-DevKit.",
+  "unity": "2021.3",
+  "author": {
+    "name": "Hoppa Play",
+    "url": "https://github.com/hoppa-cloppa"
+  },
+  "license": "MIT",
+  "keywords": [
+    "recording",
+    "ads",
+    "touch",
+    "gameplay",
+    "capture",
+    "devkit"
+  ],
+  "dependencies": {
+    "com.unity.inputsystem": "1.7.0",
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.unity.ugui": "1.0.0"
+  }
+}
