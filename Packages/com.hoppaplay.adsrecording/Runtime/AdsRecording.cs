@@ -112,7 +112,13 @@ namespace HoppaPlay.AdsRecording
         /// and share was left on the end of every recording and had to be
         /// trimmed by hand.
         /// </remarks>
-        public static void Stop()
+        /// <param name="markEnd">
+        /// Whether to flash. TRUE for a take a person is finishing; FALSE for a
+        /// safety-net teardown such as a scene change or quit, where there is
+        /// no take to mark and a stray flash would leave the editor a false
+        /// end-of-take landmark to trim against.
+        /// </param>
+        public static void Stop(bool markEnd = true)
         {
 #if DEVKIT_ENABLED
             if (_recorder == null) return;
@@ -121,7 +127,7 @@ namespace HoppaPlay.AdsRecording
             // flash covers the frames in which the UI reappears rather than
             // following them. Flashing again on a second Stop would leave a
             // later mark that the editor would read as the end of the take.
-            if (_recorder.IsRecording) SyncFlash.Show();
+            if (markEnd && _recorder.IsRecording) SyncFlash.Show();
 
             _recorder.StopRecording();
             RecordingHandle.Hide();
@@ -175,6 +181,26 @@ namespace HoppaPlay.AdsRecording
         {
 #if DEVKIT_ENABLED
             RecordingUiMask.SetHiddenObjectNames(names);
+#endif
+        }
+
+        /// <summary>
+        /// Flashes the screen without stopping, marking a moment in the take.
+        /// </summary>
+        /// <remarks>
+        /// For landmarks a person will want to find later when trimming -- a
+        /// level restart, say. It does NOT become the sync marker: the recorder
+        /// keeps the FIRST flash for that, which is the one the editor's
+        /// detector takes when two frames are equally bright. Reporting a later
+        /// marker while the editor matched the earlier one would shift every
+        /// tap by the difference.
+        ///
+        /// Does nothing when no capture is running, so callers need no guard.
+        /// </remarks>
+        public static void MarkMoment()
+        {
+#if DEVKIT_ENABLED
+            if (IsRecording) SyncFlash.Show();
 #endif
         }
 

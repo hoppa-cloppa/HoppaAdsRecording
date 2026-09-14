@@ -21,5 +21,12 @@
     "com.unity.inputsystem": "1.7.0",
     "com.unity.nuget.newtonsoft-json": "3.2.1",
     "com.unity.ugui": "1.0.0"
-  }
+  },
+  "samples": [
+    {
+      "displayName": "Basic Example",
+      "description": "Two on-screen buttons that start a take and share the JSON.",
+      "path": "Samples~/BasicExample"
+    }
+  ]
 }
